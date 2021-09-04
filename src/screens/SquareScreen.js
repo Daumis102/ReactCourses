@@ -1,44 +1,45 @@
-import React, {useState} from 'react';
+import React, { useReducer } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ColorCounter from '../components/ColorCounter';
 
 const COLOR_INCREMENT = 20;
 
+// Could define this inside the SquareScreen, but then it would be difficult to understand which state variable refers to what.
+const reducer = (state, action) => {
+    // Reducer is used for maintaining the state of very similar variables which change in a clearly defined way
+    // It has to always return a variable like its first arg, and the first arg can never be edited directly.
+    // state === {red: Number, green: Number, blue:Number}; <- reminder of what the object looks like
+    // action === {colorToChange: 'red' || 'green' || 'blue', amount: 15 || -15}
+
+    switch (action.colorToChange){
+        case 'red':
+            return {...state, red: state.red + action.amount}; // We don't want to change the state. Instead we recreate it from scratch with a new updated value.
+        case 'green':
+            return {...state, green: state.green + action.amount};
+        case 'blue':
+            return {...state, blue: state.blue + action.amount};
+        default:
+            return state;
+    }
+};
+
 const SquareScreen = () => {
 
-    const [red, setRed] = useState(0);
-    const [green, setGreen] = useState(0);
-    const [blue, setBlue] = useState(0);
-
-    const setColor = (color, change) => {
-
-    switch (color) {
-        case 'red':
-            red + change > 255 || red + change < 0 ? null : setRed(red + change);
-            return;
-        case 'green':
-            green + change > 255 || green + change < 0 ? null : setGreen(green + change);
-            return;
-        case 'blue':
-            blue + change > 255 || blue + change < 0 ? null : setBlue(blue + change);
-            return;
-        default:
-            return;
-    }
-    };
+    const [state, dispatch] = useReducer(reducer, {red:0, green:0, blue:0});
+    const {red, green, blue} = state;
 
     return <View>
         <ColorCounter 
-            onIncrease={() => setColor('red', COLOR_INCREMENT)} 
-            onDecrease={() => setColor('red', -COLOR_INCREMENT)} 
+            onIncrease={() => dispatch({colorToChange: "red", amount: COLOR_INCREMENT})}  // dispatch actually just means 'runMyReducer' and takes in an object of action format defined in the reducer.
+            onDecrease={() => dispatch({colorToChange: "red", amount: -COLOR_INCREMENT})} 
             color="Red"/>
         <ColorCounter 
-            onIncrease={() => setColor('green', COLOR_INCREMENT)} 
-            onDecrease={() => setColor('green', -COLOR_INCREMENT)} 
+            onIncrease={() => dispatch({colorToChange: "green", amount: COLOR_INCREMENT})} 
+            onDecrease={() => dispatch({colorToChange: "green", amount: -COLOR_INCREMENT})} 
             color="Green"/>
         <ColorCounter 
-            onIncrease={() => setColor('blue', COLOR_INCREMENT)} 
-            onDecrease={() => setColor('blue', -COLOR_INCREMENT)} 
+            onIncrease={() => dispatch({colorToChange: "blue", amount: COLOR_INCREMENT})} 
+            onDecrease={() => dispatch({colorToChange: "blue", amount: -COLOR_INCREMENT})} 
             color="Blue"/>
         <View style={{ 
             height:150, 
