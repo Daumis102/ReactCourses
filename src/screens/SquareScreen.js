@@ -11,13 +11,19 @@ const reducer = (state, action) => {
     // state === {red: Number, green: Number, blue:Number}; <- reminder of what the object looks like
     // action === {colorToChange: 'red' || 'green' || 'blue', amount: 15 || -15}
 
-    switch (action.colorToChange){
+    switch (action.colorToChange) {
         case 'red':
-            return {...state, red: state.red + action.amount}; // We don't want to change the state. Instead we recreate it from scratch with a new updated value.
+            if (state.red + action.amount > 255 || state.red + action.amount < 0)
+                return state;
+            return { ...state, red: state.red + action.amount }; // We don't want to change the state. Instead we recreate it from scratch with a new updated value.
         case 'green':
-            return {...state, green: state.green + action.amount};
+            if (state.green + action.amount > 255 || state.green + action.amount < 0)
+                return state;
+            return { ...state, green: state.green + action.amount };
         case 'blue':
-            return {...state, blue: state.blue + action.amount};
+            if (state.blue + action.amount > 255 || state.blue + action.amount < 0)
+                return state;
+            return { ...state, blue: state.blue + action.amount };
         default:
             return state;
     }
@@ -25,27 +31,27 @@ const reducer = (state, action) => {
 
 const SquareScreen = () => {
 
-    const [state, dispatch] = useReducer(reducer, {red:0, green:0, blue:0});
-    const {red, green, blue} = state;
+    const [state, dispatch] = useReducer(reducer, { red: 0, green: 0, blue: 0 });
+    const { red, green, blue } = state;
 
     return <View>
-        <ColorCounter 
-            onIncrease={() => dispatch({colorToChange: "red", amount: COLOR_INCREMENT})}  // dispatch actually just means 'runMyReducer' and takes in an object of action format defined in the reducer.
-            onDecrease={() => dispatch({colorToChange: "red", amount: -COLOR_INCREMENT})} 
-            color="Red"/>
-        <ColorCounter 
-            onIncrease={() => dispatch({colorToChange: "green", amount: COLOR_INCREMENT})} 
-            onDecrease={() => dispatch({colorToChange: "green", amount: -COLOR_INCREMENT})} 
-            color="Green"/>
-        <ColorCounter 
-            onIncrease={() => dispatch({colorToChange: "blue", amount: COLOR_INCREMENT})} 
-            onDecrease={() => dispatch({colorToChange: "blue", amount: -COLOR_INCREMENT})} 
-            color="Blue"/>
-        <View style={{ 
-            height:150, 
-            width: 150, 
+        <ColorCounter
+            onIncrease={() => dispatch({ colorToChange: "red", amount: COLOR_INCREMENT })}  // dispatch actually just means 'runMyReducer' and takes in an object of action format defined in the reducer.
+            onDecrease={() => dispatch({ colorToChange: "red", amount: -COLOR_INCREMENT })}
+            color="Red" />
+        <ColorCounter
+            onIncrease={() => dispatch({ colorToChange: "green", amount: COLOR_INCREMENT })}
+            onDecrease={() => dispatch({ colorToChange: "green", amount: -COLOR_INCREMENT })}
+            color="Green" />
+        <ColorCounter
+            onIncrease={() => dispatch({ colorToChange: "blue", amount: COLOR_INCREMENT })}
+            onDecrease={() => dispatch({ colorToChange: "blue", amount: -COLOR_INCREMENT })}
+            color="Blue" />
+        <View style={{
+            height: 150,
+            width: 150,
             backgroundColor: `rgb(${red},${green},${blue})`
-            }}
+        }}
         />
 
     </View>
