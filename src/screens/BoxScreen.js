@@ -21,9 +21,8 @@ const styles = StyleSheet.create({
     viewStyle: {
         borderWidth: 3,
         borderColor: 'black',
-        flexDirection: 'column',
         height: 200,
-        justifyContent: "space-evenly", // Opposite to alignItems direction-wise
+        alignItems: 'stretch',
     },
     textOneStyle: {
         borderWidth: 3,
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
     textTwoStyle: {
         borderWidth: 3,
         borderColor: 'red',
-        flex: 1, // forces this child to take up as much space as it can
+        alignSelf: 'center', // overrides the alignItems of the parent for this element
     },
     textThreeStyle: {
         borderWidth: 3,
