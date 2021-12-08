@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     viewStyle: {
         borderWidth: 3,
         borderColor: 'black',
-        alignItems: 'center',
-        flexDirection: 'row',
+        flexDirection: 'column',
         height: 200,
+        justifyContent: "space-evenly", // Opposite to alignItems direction-wise
     },
     textStyle: {
         borderWidth: 3,
