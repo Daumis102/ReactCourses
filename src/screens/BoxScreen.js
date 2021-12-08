@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: 'black',
         height: 200,
-        alignItems: 'stretch',
     },
     textOneStyle: {
         borderWidth: 3,
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
     textTwoStyle: {
         borderWidth: 3,
         borderColor: 'red',
-        alignSelf: 'center', // overrides the alignItems of the parent for this element
+        top: 10, // moves element down by 10px, but after everything else was rendered. causing it to overlay items below
     },
     textThreeStyle: {
         borderWidth: 3,
