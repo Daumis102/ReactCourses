@@ -30,11 +30,18 @@ const styles = StyleSheet.create({
     textTwoStyle: {
         borderWidth: 3,
         borderColor: 'red',
-        top: 10, // moves element down by 10px, but after everything else was rendered. causing it to overlay items below
+        // Make an item fill the whole parent
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0
     },
     textThreeStyle: {
         borderWidth: 3,
         borderColor: 'red',
+        // Shorthand for filling parent
+        ...StyleSheet.absoluteFillObject
     },
 });
 
