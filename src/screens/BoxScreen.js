@@ -11,9 +11,9 @@ const BoxScreen = () => {
     // paddingHorizontal
     // borderWidth
     return (<View style={styles.viewStyle}>
-        <Text style={styles.textStyle}>Box Screen 1</Text>
-        <Text style={styles.textStyle}>Box Screen 2</Text>
-        <Text style={styles.textStyle}>Box Screen 3</Text>
+        <Text style={styles.textOneStyle}>Box Screen 1</Text>
+        <Text style={styles.textTwoStyle}>Box Screen 2</Text>
+        <Text style={styles.textThreeStyle}>Box Screen 3</Text>
     </View>);
 };
 
@@ -25,10 +25,19 @@ const styles = StyleSheet.create({
         height: 200,
         justifyContent: "space-evenly", // Opposite to alignItems direction-wise
     },
-    textStyle: {
+    textOneStyle: {
         borderWidth: 3,
         borderColor: 'red',
-    }
+    },
+    textTwoStyle: {
+        borderWidth: 3,
+        borderColor: 'red',
+        flex: 1, // forces this child to take up as much space as it can
+    },
+    textThreeStyle: {
+        borderWidth: 3,
+        borderColor: 'red',
+    },
 });
 
 export default BoxScreen;
