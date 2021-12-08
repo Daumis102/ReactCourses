@@ -11,37 +11,59 @@ const BoxScreen = () => {
     // paddingHorizontal
     // borderWidth
     return (<View style={styles.viewStyle}>
-        <Text style={styles.textOneStyle}>Box Screen 1</Text>
-        <Text style={styles.textTwoStyle}>Box Screen 2</Text>
-        <Text style={styles.textThreeStyle}>Box Screen 3</Text>
+        <View style={styles.firstRowStyle}>
+            <Text style={styles.appBoxStyle}>App</Text>
+        </View>
+        <View style={styles.secondRowStyle}>
+            <Text style={styles.redBoxStyle}></Text>
+            <Text style={styles.purpleBoxStyle}></Text>
+        </View>
+        <View style={styles.thirdRowStyle}>
+            <Text style={styles.greenBoxStyle}></Text>
+        </View>
+        
+
     </View>);
 };
 
 const styles = StyleSheet.create({
     viewStyle: {
-        borderWidth: 3,
-        borderColor: 'black',
         height: 200,
     },
-    textOneStyle: {
-        borderWidth: 3,
-        borderColor: 'red',
+    firstRowStyle: {},
+    secondRowStyle: {
+        justifyContent: "space-between",
+        flexDirection: "row"
     },
-    textTwoStyle: {
-        borderWidth: 3,
-        borderColor: 'red',
-        // Make an item fill the whole parent
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0
+    thirdRowStyle: {
+        alignItems: "center"
     },
-    textThreeStyle: {
-        borderWidth: 3,
-        borderColor: 'red',
-        // Shorthand for filling parent
-        ...StyleSheet.absoluteFillObject
+    appBoxStyle: {
+        borderWidth: 1,
+        borderColor: 'black',
+        alignItems: 'center',
+    },
+    redBoxStyle: {
+        borderWidth: 1,
+        borderColor: 'black',
+        backgroundColor: 'red',
+        width: 20,
+        height: 20,
+
+    },
+    purpleBoxStyle: {
+        borderWidth: 1,
+        borderColor: 'black',
+        backgroundColor: 'purple',
+        width: 20,
+        height: 20,
+    },
+    greenBoxStyle: {
+        borderWidth: 1,
+        borderColor: 'black',
+        backgroundColor: 'green',
+        width: 20,
+        height: 20,
     },
 });
 
