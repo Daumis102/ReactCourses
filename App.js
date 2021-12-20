@@ -1,27 +1,11 @@
 import React from "react";
-import { createStackNavigator } from "react-navigation-stack";
 import IndexScreen from "./src/screens/IndexScreen";
 import ShowScreen from "./src/screens/ShowScreen";
 import CreateScreen from "./src/screens/CreateScreen";
+import CreateButton from "./src/components/CreateButton";
 import { Provider } from "./src/context/BlogContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-// const navigator = createStackNavigator(
-//   {
-//     Index: IndexScreen,
-//     Show: ShowScreen,
-//     Create: CreateScreen,
-//   },
-//   {
-//     initialRouteName: "Index",
-//     defaultNavigationOptions: {
-//       title: "Blogs",
-//     },
-//   }
-// );
-// createAppContainer creates a simple component with a navigator included.
-// const App = createAppContainer(navigator);
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
@@ -30,7 +14,7 @@ const App = () => {
         <Stack.Screen
           name="Index"
           component={IndexScreen}
-          defaultNavigationOptions={{ title: "Blogs" }}
+          options={{ title: "Blogs", headerRight: () => <CreateButton /> }}
         />
         <Stack.Screen name="Show" component={ShowScreen} />
         <Stack.Screen name="Create" component={CreateScreen} />
