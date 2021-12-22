@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,7 +10,14 @@ import { Context } from "../context/BlogContext";
 import { Feather } from "@expo/vector-icons";
 
 const IndexScreen = ({ navigation }) => {
-  const { state, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
+  useEffect(() => {
+    getBlogPosts();
+    const unsubscribe = navigation.addListener("focus", () => {
+      getBlogPosts();
+    });
+    return unsubscribe; // this function will only return on the component destroy event. Gotta unsubscribe to prevent mem leak
+  }, []);
   return (
     <View>
       <FlatList
