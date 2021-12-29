@@ -8,6 +8,7 @@ import SignupScreen from './src/screens/SignupScreen';
 import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailsScreen from './src/screens/TrackDetailsScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
+import { Provider as AuthProvider } from './src/context/AuthContext';
 
 const AuthStackNavigator = createNativeStackNavigator();
 const BottomTabNavigator = createBottomTabNavigator();
@@ -73,8 +74,10 @@ export const MainNavigator = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <AuthNavigator />
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <AuthNavigator />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
