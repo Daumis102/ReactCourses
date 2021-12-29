@@ -1,45 +1,24 @@
-import React, { useState, useContext } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import { Text, Input, Button } from 'react-native-elements';
+import React, { useContext } from 'react';
+import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import Spacer from '../components/Spacer.js';
 import { Context as AuthContext } from '../context/AuthContext.js';
+import AuthForm from '../components/AuthForm.js';
+import NavLink from '../components/NavLink.js';
 
 const SignupScreen = ({ navigation }) => {
   const { state, signup } = useContext(AuthContext);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
   return (
     <KeyboardAvoidingView>
       <ScrollView style={styles.contentContainerStyle}>
         <View style={styles.container}>
-          <Spacer>
-            <Text h3>Sign Up for Tracker</Text>
-          </Spacer>
-          <Input
-            label="Email"
-            value={email}
-            onChangeText={setEmail}
-            autoCapitalize="none"
-            autoCorrect={false}
+          <AuthForm
+            headerText={'Sign up for Tracker'}
+            errorMessage={state.errorMessage}
+            submitButtonText={'Sign Up'}
+            onSubmit={signup}
           />
-          <Input
-            secureTextEntry
-            label="Password"
-            value={password}
-            onChangeText={setPassword}
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
-          {state.errorMessage ? (
-            <Text style={styles.errorMessage}>{state.errorMessage}</Text>
-          ) : null}
-          <Spacer>
-            <Button title="Sign Up" onPress={() => signup(email, password)} />
-          </Spacer>
-          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-            <Text style={styles.link}>Already have an account? Sign in instead</Text>
-          </TouchableOpacity>
+          <NavLink text={'Already have an account? Sign in instead'} routeName={'SignIn'} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -47,16 +26,8 @@ const SignupScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', marginBottom: 200, paddingVertical: 150 },
-  contentContainerStyle: {},
-  errorMessage: {
-    fontSize: 16,
-    color: 'red',
-    marginLeft: 15,
-  },
-  link: {
-    color: 'blue',
-  },
+  container: { flex: 1, justifyContent: 'center', marginBottom: 200 },
+  contentContainerStyle: { paddingVertical: 150 },
 });
 
 export default SignupScreen;

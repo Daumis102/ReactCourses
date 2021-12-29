@@ -29,7 +29,15 @@ export const AuthNavigator = () => {
           headerShown: false,
         }}
       ></AuthStackNavigator.Screen>
-      <AuthStackNavigator.Screen name="SignIn" component={SigninScreen}></AuthStackNavigator.Screen>
+      <AuthStackNavigator.Screen
+        name="SignIn"
+        component={SigninScreen}
+        options={{
+          title: 'Sign In',
+          animationEnabled: false,
+          headerShown: false,
+        }}
+      ></AuthStackNavigator.Screen>
       <AuthStackNavigator.Screen
         name="MainFlow"
         component={MainNavigator}
