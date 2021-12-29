@@ -27,6 +27,11 @@ export const AuthNavigator = () => {
         }}
       ></AuthStackNavigator.Screen>
       <AuthStackNavigator.Screen name="SignIn" component={SigninScreen}></AuthStackNavigator.Screen>
+      <AuthStackNavigator.Screen
+        name="MainFlow"
+        component={MainNavigator}
+        options={{ headerShown: false, animationEnabled: false }}
+      ></AuthStackNavigator.Screen>
     </AuthStackNavigator.Navigator>
   );
 };
@@ -39,7 +44,7 @@ export const TrackListNavigator = () => {
         component={TrackListScreen}
       ></TrackListStackNavigator.Screen>
       <TrackListStackNavigator.Screen
-        name="TrackDetailScreen"
+        name="TrackDetail"
         component={TrackDetailsScreen}
       ></TrackListStackNavigator.Screen>
     </TrackListStackNavigator.Navigator>
@@ -50,8 +55,9 @@ export const MainNavigator = () => {
   return (
     <BottomTabNavigator.Navigator>
       <BottomTabNavigator.Screen
-        name="TrackNavigator"
+        name="TrackListFlow"
         component={TrackListNavigator}
+        options={{ headerShown: false }}
       ></BottomTabNavigator.Screen>
       <BottomTabNavigator.Screen
         name="TrackCreate"
