@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import Spacer from '../components/Spacer.js';
@@ -37,6 +37,9 @@ const SignupScreen = ({ navigation }) => {
           <Spacer>
             <Button title="Sign Up" onPress={() => signup(email, password)} />
           </Spacer>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <Text style={styles.link}>Already have an account? Sign in instead</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -44,14 +47,15 @@ const SignupScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', marginBottom: 200 },
-  contentContainerStyle: {
-    paddingVertical: 150,
-  },
+  container: { flex: 1, justifyContent: 'center', marginBottom: 200, paddingVertical: 150 },
+  contentContainerStyle: {},
   errorMessage: {
     fontSize: 16,
     color: 'red',
     marginLeft: 15,
+  },
+  link: {
+    color: 'blue',
   },
 });
 
