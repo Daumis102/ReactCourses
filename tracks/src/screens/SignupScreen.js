@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Context as AuthContext } from '../context/AuthContext.js';
@@ -6,7 +6,14 @@ import AuthForm from '../components/AuthForm.js';
 import NavLink from '../components/NavLink.js';
 
 const SignupScreen = ({ navigation }) => {
-  const { state, signup } = useContext(AuthContext);
+  const { state, signup, clearErrorMessage } = useContext(AuthContext);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      clearErrorMessage();
+    });
+
+    return unsubscribe;
+  }, [navigation, clearErrorMessage]);
 
   return (
     <KeyboardAvoidingView>
