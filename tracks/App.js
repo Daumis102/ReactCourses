@@ -8,6 +8,7 @@ import SignupScreen from './src/screens/SignupScreen';
 import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailsScreen from './src/screens/TrackDetailsScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { navigationRef } from './src/navigationRef';
 
@@ -15,11 +16,14 @@ const AuthStackNavigator = createNativeStackNavigator();
 const BottomTabNavigator = createBottomTabNavigator();
 const TrackListStackNavigator = createNativeStackNavigator();
 
-let isSignedIn = false;
-
 export const AuthNavigator = () => {
   return (
-    <AuthStackNavigator.Navigator>
+    <AuthStackNavigator.Navigator options={{ default: 'ResolveAuth' }}>
+      <AuthStackNavigator.Screen
+        name="ResolveAuth"
+        component={ResolveAuthScreen}
+        options={{ animationEnabled: false, headerShown: false }}
+      ></AuthStackNavigator.Screen>
       <AuthStackNavigator.Screen
         name="SignUp"
         component={SignupScreen}
@@ -77,6 +81,7 @@ export const MainNavigator = () => {
       <BottomTabNavigator.Screen
         name="Account"
         component={AccountScreen}
+        options={{ headerShown: false }}
       ></BottomTabNavigator.Screen>
     </BottomTabNavigator.Navigator>
   );
