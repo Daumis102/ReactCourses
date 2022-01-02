@@ -11,6 +11,7 @@ import TrackListScreen from './src/screens/TrackListScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as LocationProvider } from './src/context/LocationContext';
+import { Provider as TrackProvider } from './src/context/TrackContext';
 import { navigationRef } from './src/navigationRef';
 
 const AuthStackNavigator = createNativeStackNavigator();
@@ -90,12 +91,14 @@ export const MainNavigator = () => {
 
 export default function App() {
   return (
-    <LocationProvider>
-      <AuthProvider>
-        <NavigationContainer ref={navigationRef}>
-          <AuthNavigator />
-        </NavigationContainer>
-      </AuthProvider>
-    </LocationProvider>
+    <TrackProvider>
+      <LocationProvider>
+        <AuthProvider>
+          <NavigationContainer ref={navigationRef}>
+            <AuthNavigator />
+          </NavigationContainer>
+        </AuthProvider>
+      </LocationProvider>
+    </TrackProvider>
   );
 }

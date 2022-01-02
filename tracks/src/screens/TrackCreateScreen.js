@@ -1,4 +1,3 @@
-import '../_mockLocation';
 import React, { useContext, useCallback } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
