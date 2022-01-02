@@ -30,6 +30,9 @@ export default (shouldTrack, callback) => {
       subscriber.remove();
       setSubsriber(null);
     }
+    return () => {
+      if (subscriber) subscriber.remove(); // return a "cleanup" function - every time the useEffect is rerun, this will clean the previous version of it
+    };
   }, [shouldTrack, callback]); // rerun only when callback is not referencing the same function anymore (we change the function with useCallback in trackcreateScreen)
 
   return [err]; // we are using err in TrackCreateScreen, thus  return. We might want to return more things in the future, thus array
