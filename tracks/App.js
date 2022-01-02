@@ -14,6 +14,7 @@ import { Provider as LocationProvider } from './src/context/LocationContext';
 import { Provider as TrackProvider } from './src/context/TrackContext';
 import { navigationRef } from './src/navigationRef';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { FontAwesome } from '@expo/vector-icons';
 
 const AuthStackNavigator = createNativeStackNavigator();
 const BottomTabNavigator = createBottomTabNavigator();
@@ -60,12 +61,12 @@ export const TrackListNavigator = () => {
       <TrackListStackNavigator.Screen
         name="TrackList"
         component={TrackListScreen}
-        options={{ headerShown: false }}
+        options={{ title: 'Track List' }}
       ></TrackListStackNavigator.Screen>
       <TrackListStackNavigator.Screen
         name="TrackDetail"
         component={TrackDetailsScreen}
-        options={{ headerShown: false }}
+        options={{ title: '' }}
       ></TrackListStackNavigator.Screen>
     </TrackListStackNavigator.Navigator>
   );
@@ -77,17 +78,34 @@ export const MainNavigator = () => {
       <BottomTabNavigator.Screen
         name="TrackListFlow"
         component={TrackListNavigator}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          title: 'Tracks',
+          tabBarIcon: (tabInfo) => (
+            <FontAwesome name="th-list" size={20} color={tabInfo.focused ? '#006600' : '#8e8e93'} />
+          ),
+        }}
       ></BottomTabNavigator.Screen>
       <BottomTabNavigator.Screen
         name="TrackCreate"
         component={TrackCreateScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          title: 'Add Track',
+          tabBarIcon: (tabInfo) => (
+            <FontAwesome name="plus" size={20} color={tabInfo.focused ? '#006600' : '#8e8e93'} />
+          ),
+        }}
       ></BottomTabNavigator.Screen>
       <BottomTabNavigator.Screen
         name="Account"
         component={AccountScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: (tabInfo) => (
+            <FontAwesome name="gear" size={20} color={tabInfo.focused ? '#006600' : '#8e8e93'} />
+          ),
+        }}
       ></BottomTabNavigator.Screen>
     </BottomTabNavigator.Navigator>
   );
