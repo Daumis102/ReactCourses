@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from 'react-native-elements';
-import { SafeAreaView } from 'react-navigation';
 import Map from '../components/Map';
 import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
@@ -23,7 +23,7 @@ const TrackCreateScreen = () => {
   const [err] = useLocation(isFocused || recording, callback);
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }}>
+    <SafeAreaView style={styles.container}>
       <Text h2>Create a Track</Text>
       <Map></Map>
       {err ? <Text>Please enable location services</Text> : null}
@@ -32,6 +32,10 @@ const TrackCreateScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default TrackCreateScreen; // gives isFocused prop to the component

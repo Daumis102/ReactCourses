@@ -13,6 +13,7 @@ import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as LocationProvider } from './src/context/LocationContext';
 import { Provider as TrackProvider } from './src/context/TrackContext';
 import { navigationRef } from './src/navigationRef';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const AuthStackNavigator = createNativeStackNavigator();
 const BottomTabNavigator = createBottomTabNavigator();
@@ -59,10 +60,12 @@ export const TrackListNavigator = () => {
       <TrackListStackNavigator.Screen
         name="TrackList"
         component={TrackListScreen}
+        options={{ headerShown: false }}
       ></TrackListStackNavigator.Screen>
       <TrackListStackNavigator.Screen
         name="TrackDetail"
         component={TrackDetailsScreen}
+        options={{ headerShown: false }}
       ></TrackListStackNavigator.Screen>
     </TrackListStackNavigator.Navigator>
   );
@@ -79,6 +82,7 @@ export const MainNavigator = () => {
       <BottomTabNavigator.Screen
         name="TrackCreate"
         component={TrackCreateScreen}
+        options={{ headerShown: false }}
       ></BottomTabNavigator.Screen>
       <BottomTabNavigator.Screen
         name="Account"
@@ -91,14 +95,16 @@ export const MainNavigator = () => {
 
 export default function App() {
   return (
-    <TrackProvider>
-      <LocationProvider>
-        <AuthProvider>
-          <NavigationContainer ref={navigationRef}>
-            <AuthNavigator />
-          </NavigationContainer>
-        </AuthProvider>
-      </LocationProvider>
-    </TrackProvider>
+    <SafeAreaProvider>
+      <TrackProvider>
+        <LocationProvider>
+          <AuthProvider>
+            <NavigationContainer ref={navigationRef}>
+              <AuthNavigator />
+            </NavigationContainer>
+          </AuthProvider>
+        </LocationProvider>
+      </TrackProvider>
+    </SafeAreaProvider>
   );
 }
