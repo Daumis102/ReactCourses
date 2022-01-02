@@ -10,15 +10,18 @@ import { useIsFocused } from '@react-navigation/native';
 import TrackForm from '../components/TrackForm';
 
 const TrackCreateScreen = () => {
-  const { state, addLocation } = useContext(LocationContext);
+  const {
+    state: { recording },
+    addLocation,
+  } = useContext(LocationContext);
   const callback = useCallback(
     (location) => {
-      addLocation(location, state.recording);
+      addLocation(location, recording);
     },
-    [state.recording]
+    [recording]
   ); // Rebuilds the callback function every time the state.recording changes, to prevent using an old reference of the callback in useLocation
   const isFocused = useIsFocused();
-  const [err] = useLocation(isFocused, callback);
+  const [err] = useLocation(isFocused || recording, callback);
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
