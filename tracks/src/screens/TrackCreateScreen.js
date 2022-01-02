@@ -10,9 +10,11 @@ import { useIsFocused } from '@react-navigation/native';
 import TrackForm from '../components/TrackForm';
 
 const TrackCreateScreen = () => {
-  const { addLocation } = useContext(LocationContext);
+  const { state, addLocation } = useContext(LocationContext);
   const isFocused = useIsFocused();
-  const [err] = useLocation(isFocused, addLocation); // passing in a callback function to do on location update
+  const [err] = useLocation(isFocused, (location) => {
+    addLocation(location, state.recording);
+  });
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
